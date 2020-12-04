@@ -1,0 +1,69 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://music/layer-3.ogg" type="AudioStream" id=1]
+[ext_resource path="res://music/layer-4.ogg" type="AudioStream" id=2]
+[ext_resource path="res://music/layer-2.ogg" type="AudioStream" id=3]
+[ext_resource path="res://addons/mixing-desk/music/mixing_desk_music.gd" type="Script" id=4]
+[ext_resource path="res://music/layer-1.ogg" type="AudioStream" id=5]
+[ext_resource path="res://addons/mixing-desk/music/containers/core_cont.gd" type="Script" id=6]
+[ext_resource path="res://addons/mixing-desk/music/song.gd" type="Script" id=7]
+[ext_resource path="res://addons/mixing-desk/music/containers/autolayer_cont.gd" type="Script" id=8]
+[ext_resource path="res://music/layer-0.ogg" type="AudioStream" id=9]
+[ext_resource path="res://music/layer-end.ogg" type="AudioStream" id=10]
+[ext_resource path="res://music/silence.ogg" type="AudioStream" id=11]
+[ext_resource path="res://scripts/Music.gd" type="Script" id=12]
+
+[node name="Music" type="Node2D"]
+script = ExtResource( 12 )
+
+[node name="MixingDesk" type="Node" parent="."]
+script = ExtResource( 4 )
+play_mode = 1
+autoplay_song = NodePath("../../Main/MixingDeskMusic/Song")
+
+[node name="Song" type="Node" parent="MixingDesk"]
+script = ExtResource( 7 )
+tempo = 230
+bars = 4
+beats_in_bar = 8
+transition_beats = 0.1
+transition_type = "Beat"
+
+[node name="layer0" type="Node" parent="MixingDesk/Song"]
+script = ExtResource( 6 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MixingDesk/Song/layer0"]
+stream = ExtResource( 11 )
+
+[node name="AutoLayerContainer" type="Node" parent="MixingDesk/Song"]
+script = ExtResource( 8 )
+layer_max = 1
+track_speed = 0.8
+
+[node name="layer0" type="AudioStreamPlayer" parent="MixingDesk/Song/AutoLayerContainer"]
+stream = ExtResource( 9 )
+
+[node name="layer1" type="AudioStreamPlayer" parent="MixingDesk/Song/AutoLayerContainer"]
+stream = ExtResource( 5 )
+
+[node name="layer2" type="AudioStreamPlayer" parent="MixingDesk/Song/AutoLayerContainer"]
+stream = ExtResource( 3 )
+volume_db = -65.0
+
+[node name="layer3" type="AudioStreamPlayer" parent="MixingDesk/Song/AutoLayerContainer"]
+stream = ExtResource( 1 )
+volume_db = -65.0
+
+[node name="layer4" type="AudioStreamPlayer" parent="MixingDesk/Song/AutoLayerContainer"]
+stream = ExtResource( 2 )
+volume_db = -65.0
+
+[node name="EndLayer" type="Node" parent="MixingDesk/Song"]
+script = ExtResource( 8 )
+layer_max = -1
+track_speed = 0.6
+
+[node name="layer5" type="AudioStreamPlayer" parent="MixingDesk/Song/EndLayer"]
+stream = ExtResource( 10 )
+volume_db = -65.0
+bus = "EndEffect"
