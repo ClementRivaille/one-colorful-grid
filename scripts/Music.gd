@@ -9,6 +9,8 @@ onready var mixing_desk = $MixingDesk
 onready var layers = $MixingDesk/Song/AutoLayerContainer
 onready var end_layer = $MixingDesk/Song/EndLayer
 
+var current_bar := 0
+
 var index := 1
 var ending := false
 var ended := false
@@ -71,11 +73,15 @@ func on_beat(_beat):
     
   emit_signal("beat")
 
-func on_bar(_bar):
+func on_bar(bar):
   if credits:
     layers.track_speed = 1.0
     layers.layer_max = 5
     
-  emit_signal("bar")
+  current_bar = (bar - 1)%4
+  emit_signal("bar", current_bar)
 
 
+
+func _on_AudioStreamPlayer_started():
+  print("that works!")

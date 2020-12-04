@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Instruments",
+"language": "GDScript",
+"path": "res://scripts/Instruments.gd"
+}, {
+"base": "AudioStreamPlayer",
+"class": "Metronome",
+"language": "GDScript",
+"path": "res://scripts/Metronome.gd"
+}, {
 "base": "Sampler",
 "class": "Multisampler",
 "language": "GDScript",
@@ -35,6 +45,8 @@ _global_script_classes=[ {
 "path": "res://addons/SimpleSampler/sampler.gd"
 } ]
 _global_script_class_icons={
+"Instruments": "",
+"Metronome": "",
 "Multisampler": "",
 "Music": "",
 "NoteSample": "",
