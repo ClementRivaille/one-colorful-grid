@@ -44,10 +44,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/SimpleSampler/note_value.gd"
 }, {
+"base": "Control",
+"class": "Pipe",
+"language": "GDScript",
+"path": "res://scripts/Pipe.gd"
+}, {
 "base": "AudioStreamPlayer",
 "class": "Sampler",
 "language": "GDScript",
 "path": "res://addons/SimpleSampler/sampler.gd"
+}, {
+"base": "Control",
+"class": "Visualizer",
+"language": "GDScript",
+"path": "res://scripts/Visualizer.gd"
 } ]
 _global_script_class_icons={
 "Instruments": "",
@@ -57,7 +67,9 @@ _global_script_class_icons={
 "Music": "",
 "NoteSample": "",
 "NoteValueCalculator": "",
-"Sampler": ""
+"Pipe": "",
+"Sampler": "",
+"Visualizer": ""
 }
 
 [application]
@@ -69,6 +81,13 @@ config/icon="res://icon.png"
 [autoload]
 
 NoteValue="*res://addons/SimpleSampler/note_value.gd"
+
+[display]
+
+window/size/width=900
+window/size/height=900
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 

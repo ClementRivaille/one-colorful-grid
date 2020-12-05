@@ -5,7 +5,7 @@ signal play
 
 var phrase := []
 var waiting := 0
-var quarter_only := true
+var quarter_only := false
 var playing := false
 
 var phrase_min_length := 3
@@ -25,7 +25,7 @@ func clear():
   waiting = phrase_interval + 2
   
 func init():
-  waiting = phrase_interval + 2
+  waiting = phrase_interval + 1
   playing = false
 
 func on_beat(beat):

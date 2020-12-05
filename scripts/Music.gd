@@ -5,16 +5,17 @@ signal beat
 signal bar
 signal end
 
+signal beat_ended
+
 onready var mixing_desk = $MixingDesk
 onready var layers = $MixingDesk/Song/AutoLayerContainer
 onready var end_layer = $MixingDesk/Song/EndLayer
+var metronome: Metronome
 
 var current_bar := 0
 
 var index := 1
 var ending := false
-var ended := false
-var credits := false
 
 func _ready():
   mixing_desk.init_song(0)
@@ -23,26 +24,14 @@ func _ready():
   mixing_desk.connect("bar", self, "on_bar")
   mixing_desk.connect("beat", self, "on_beat")
 
-func _input(event: InputEvent):
-  if event.is_action_pressed("ui_accept"):
-    if mixing_desk.playing:
-      mixing_desk.stop(0)
-    else:
-      mixing_desk.start_alone(0,0)
+func start():
+  mixing_desk.start_alone(0,0)
+
+func stop_after_bar():
+  mixing_desk.stop(0)
   
-  if !ended:
-    if event.is_action_pressed("ui_right") && !ending:
-      index = int(min(5.0, index+1))
-      layers.layer_max = index
-    if event.is_action_pressed("ui_left"):
-      if index == 5:
-        cancel_end()
-      else:
-        index = int(max(-1, index -1))
-        layers.layer_max = index
-    
-  if index == 5 && !ending:
-    trigger_end()
+func set_layer(index: int):
+  layers.layer_max = index
 
 func trigger_end():
   layers.track_speed = 0.5;
@@ -55,33 +44,40 @@ func cancel_end():
   layers.layer_max = index;
   end_layer.layer_max = -1;
   ending = false
+  
+func validate_end():
+  ending = true
 
 func on_end(_song):
-  if index == 5 && !ending && !ended:
-    ending = true
-  elif ending && !ended:
+  emit_signal("end")
+  
+  if ending:
+    ending = false
     end_layer.track_speed = 1.0
     end_layer.layer_max = -1
-    ended = true    
-  
-  emit_signal("end")
+    yield(mixing_desk, "beat")
+    mixing_desk.queue_bar_transition(0)
+    yield(mixing_desk, "bar")
+    layers.track_speed = 1.0
+    layers.layer_max = 5
 
 func on_beat(beat):
-  if ended && !credits:
-    mixing_desk.queue_bar_transition(0)
-    credits = true
-    
   emit_signal("beat", beat - 1)
 
 func on_bar(bar):
-  if credits:
-    layers.track_speed = 1.0
-    layers.layer_max = 5
-    
   current_bar = (bar - 1)%4
   emit_signal("bar", current_bar)
 
+func on_metronome_started(instance: Metronome):
+  if metronome:
+    metronome.disconnect("beat_ended", self, "on_beat_ended")
+  metronome = instance
+  metronome.connect("beat_ended", self, "on_beat_ended")
+  
+func on_beat_ended(beat: int):
+  emit_signal("beat_ended", beat)
 
-
-func _on_AudioStreamPlayer_started():
-  pass
+func get_active_beat() -> int:
+  if metronome && metronome.playing:
+    return metronome.get_active_beat()
+  return -1

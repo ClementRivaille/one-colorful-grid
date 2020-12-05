@@ -69,4 +69,4 @@ track_speed = 0.6
 stream = ExtResource( 10 )
 volume_db = -65.0
 bus = "EndEffect"
-[connection signal="started" from="MixingDesk/Song/layer0/AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_started"]
+[connection signal="started" from="MixingDesk/Song/layer0/AudioStreamPlayer" to="." method="on_metronome_started"]

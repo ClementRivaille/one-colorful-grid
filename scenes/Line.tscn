@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="Line" type="ColorRect"]
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_right = 2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
