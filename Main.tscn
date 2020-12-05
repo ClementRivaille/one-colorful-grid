@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/Music.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/SimpleSampler/multisampler.gd" type="Script" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://sfx/success.ogg" type="AudioStream" id=13]
 [ext_resource path="res://scenes/Shield.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scripts/Shields.gd" type="Script" id=15]
+[ext_resource path="res://scripts/Background.gd" type="Script" id=16]
+[ext_resource path="res://scripts/View.gd" type="Script" id=17]
+[ext_resource path="res://scenes/Pipe.tscn" type="PackedScene" id=18]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 3 )
@@ -60,6 +63,53 @@ max_notes = 3
 [node name="Melody" type="Node2D" parent="."]
 script = ExtResource( 6 )
 
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -40.0
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+colors = [ Color( 0, 0, 0, 1 ), Color( 0.180392, 0.180392, 0.180392, 1 ), Color( 0.121569, 0.129412, 0.407843, 1 ), Color( 0.0862745, 0.356863, 0.254902, 1 ), Color( 0.376471, 0.0352941, 0.180392, 1 ), Color( 1, 1, 1, 1 ) ]
+
+[node name="BorderPipes" type="Control" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left" parent="Background/BorderPipes" instance=ExtResource( 18 )]
+anchor_right = 0.0
+margin_right = 40.0
+
+[node name="top" parent="Background/BorderPipes" instance=ExtResource( 18 )]
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+rect_rotation = 90.0
+
+[node name="right" parent="Background/BorderPipes" instance=ExtResource( 18 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_right = 40.0
+rect_rotation = 180.0
+
+[node name="bottom" parent="Background/BorderPipes" instance=ExtResource( 18 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+rect_rotation = -90.0
+
+[node name="Tween" type="Tween" parent="Background"]
+
 [node name="Visualizer" parent="." instance=ExtResource( 7 )]
 
 [node name="Validator" type="Node2D" parent="."]
@@ -90,10 +140,6 @@ anchor_left = 0.25
 anchor_top = 0.25
 anchor_right = 0.25
 anchor_bottom = 0.25
-margin_left = -135.0
-margin_top = -135.0
-margin_right = 65.0
-margin_bottom = 65.0
 
 [node name="Shield2" parent="Shields" instance=ExtResource( 14 )]
 visible = false
@@ -101,10 +147,6 @@ anchor_left = 0.75
 anchor_top = 0.75
 anchor_right = 0.75
 anchor_bottom = 0.75
-margin_left = -65.0
-margin_top = -65.0
-margin_right = 135.0
-margin_bottom = 135.0
 
 [node name="Shield3" parent="Shields" instance=ExtResource( 14 )]
 visible = false
@@ -112,10 +154,6 @@ anchor_left = 0.25
 anchor_top = 0.75
 anchor_right = 0.25
 anchor_bottom = 0.75
-margin_left = -135.0
-margin_top = -65.0
-margin_right = 65.0
-margin_bottom = 135.0
 
 [node name="Shield4" parent="Shields" instance=ExtResource( 14 )]
 visible = false
@@ -123,11 +161,12 @@ anchor_left = 0.75
 anchor_top = 0.25
 anchor_right = 0.75
 anchor_bottom = 0.25
-margin_left = -65.0
-margin_top = -135.0
-margin_right = 135.0
-margin_bottom = 65.0
 
 [node name="View" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
+script = ExtResource( 17 )
+
+[node name="Timer" type="Timer" parent="View"]
+wait_time = 0.2
+one_shot = true

@@ -19,13 +19,16 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_rotation = -90.0
+line_color = Color( 0.87451, 0.443137, 0.423529, 1 )
 
 [node name="Left" parent="." instance=ExtResource( 1 )]
+line_color = Color( 0.847059, 0.847059, 0.329412, 1 )
 
 [node name="Right" parent="." instance=ExtResource( 1 )]
 anchor_left = 1.0
 anchor_right = 1.5
 rect_scale = Vector2( -1, 1 )
+line_color = Color( 0.780392, 0.364706, 0.72549, 1 )
 
 [node name="Top" parent="." instance=ExtResource( 1 )]
 anchor_left = 0.5
@@ -33,6 +36,7 @@ anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
 rect_rotation = 90.0
+line_color = Color( 0.521569, 0.52549, 0.803922, 1 )
 
 [node name="Center" type="Control" parent="."]
 anchor_left = 0.4
@@ -46,7 +50,7 @@ __meta__ = {
 [node name="background" type="ColorRect" parent="Center"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.337255, 0.337255, 0.337255, 1 )
+color = Color( 0.298039, 0.298039, 0.298039, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -55,6 +59,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 0.5
+color = Color( 1, 1, 1, 0.498039 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,6 +69,7 @@ visible = false
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0.498039 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -72,6 +78,7 @@ __meta__ = {
 visible = false
 anchor_right = 0.5
 anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0.498039 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -81,6 +88,7 @@ visible = false
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0.498039 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

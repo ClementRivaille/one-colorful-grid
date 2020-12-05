@@ -7,6 +7,8 @@ onready var visualizer: Visualizer = $Visualizer
 onready var validator: Validator = $Validator
 onready var sfx: SFX = $SFX
 onready var shields: Shield = $Shields
+onready var background: Background = $Background
+onready var view: View = $View
 
 var playing := false
 
@@ -21,6 +23,7 @@ func _ready():
   music.connect("beat_ended", validator, "on_beat_end")
   validator.connect("missed", self, "on_miss")
   melody.init()
+  visualizer.colorize(background.color)
   
 func _input(event: InputEvent):
   if event.is_action_pressed("ui_accept"):
@@ -32,7 +35,7 @@ func _input(event: InputEvent):
       start_game()
       visualizer.reset_progress(completion_needed)
     
-  if playing:
+  if playing && level > 0:
     if event.is_action_pressed("ui_down"):
       play_note(0)
     if event.is_action_pressed("ui_left"):
@@ -53,9 +56,8 @@ func _input(event: InputEvent):
       
 func start_game():
   level = 1
-  music.set_layer(level)
+  setup_level()
   melody.init()
-  completion_needed = 8
   shields.add_shield()
   playing = true
 
@@ -77,19 +79,18 @@ func on_miss():
   visualizer.clear()
   validator.clear()
   melody.clear()
+  view.shake()
   
   if shields.has_shield():
     shields.remove_shield()
   else:
     level -= 1
-    music.set_layer(level)
+    setup_level()
     
     if level == 0:
       melody.deactivate()
       visualizer.reset_progress()
-      playing = false
     else:
-      completion_needed = 8
       visualizer.reset_progress(completion_needed)
 
 func validate_note(value: int):
@@ -105,9 +106,14 @@ func validate_note(value: int):
     
     level += 1
     sfx.play_success()
-    music.set_layer(level)
-    completion_needed = 8
     shields.add_shield()
+    setup_level()
     
     visualizer.progress_complete()
     visualizer.create_progression(completion_needed)
+
+func setup_level():
+  music.set_layer(level)
+  completion_needed = 8
+  background.set_level(level)
+  visualizer.colorize(background.color)

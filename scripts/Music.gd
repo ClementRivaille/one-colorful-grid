@@ -66,6 +66,7 @@ func on_beat(beat):
 func on_bar(bar):
   current_bar = (bar - 1)%4
   emit_signal("bar", current_bar)
+  print(current_bar)
 
 func on_metronome_started(instance: Metronome):
   if metronome:

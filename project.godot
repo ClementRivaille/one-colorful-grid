@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "ColorRect",
+"class": "Background",
+"language": "GDScript",
+"path": "res://scripts/Background.gd"
+}, {
 "base": "Node2D",
 "class": "Instruments",
 "language": "GDScript",
@@ -74,12 +79,18 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Validator.gd"
 }, {
+"base": "Camera2D",
+"class": "View",
+"language": "GDScript",
+"path": "res://scripts/View.gd"
+}, {
 "base": "Control",
 "class": "Visualizer",
 "language": "GDScript",
 "path": "res://scripts/Visualizer.gd"
 } ]
 _global_script_class_icons={
+"Background": "",
 "Instruments": "",
 "Melody": "",
 "Metronome": "",
@@ -93,6 +104,7 @@ _global_script_class_icons={
 "Sampler": "",
 "Shield": "",
 "Validator": "",
+"View": "",
 "Visualizer": ""
 }
 

@@ -4,11 +4,13 @@ class_name Pipe
 var duration := 60.0 / 115.0
 
 export(PackedScene) var line_prefab: PackedScene
+export(Color) var line_color := Color(1,1,1,1)
 
 onready var lines: Control = $Lines
 
 func add_line():
   var line: ColorRect = line_prefab.instance()
+  line.color = line_color
   lines.add_child(line)
   var line_tween: Tween = line.get_child(0)
   line_tween.interpolate_property(line, "anchor_left", 0.0, 1.0, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

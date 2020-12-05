@@ -38,8 +38,12 @@ func reset():
   score = 0
 
 func complete():
-  for bar in [top_bar, right_bar, bottom_bar, left_bar]:
-    tween.interpolate_property(bar, "color", Color(1,1,1,1), Color(1,1,1,0), 0.5, Tween.TRANS_SINE, Tween.EASE_IN)
-    tween.start()
+  colorize(Color(1,1,1,1))
+  tween.interpolate_property(self, "modulate", Color(1,1,1,1), Color(1,1,1,0), 0.5, Tween.TRANS_SINE, Tween.EASE_IN)
+  tween.start()
   yield(tween, "tween_all_completed")
   emit_signal("completed", self)
+
+func colorize(color: Color):
+  for bar in [top_bar, right_bar, bottom_bar, left_bar]:
+    bar.color = color

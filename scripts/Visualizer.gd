@@ -10,6 +10,7 @@ onready var bottom_center: ColorRect = $Center/Bottom
 onready var left_center: ColorRect = $Center/Left
 onready var right_center: ColorRect = $Center/Right
 onready var top_center: ColorRect = $Center/Top
+onready var center_bg: ColorRect = $Center/background
 
 var pipes: Array
 var center: Array
@@ -46,6 +47,7 @@ func create_progression(max_score: int):
   progression.init(max_score)
   $Center.add_child(progression)
   progression.connect("completed", self, "on_progression_completed")
+  progression.colorize(center_bg.color.darkened(0.3))
 
 func progress():
   progression.progress()
@@ -54,9 +56,13 @@ func reset_progress(max_score: int = 0):
   progression.reset()
   if max_score > 0:
     progression.init(max_score)
+  progression.colorize(center_bg.color.darkened(0.3))
     
 func progress_complete():
   progression.complete()
 
 func on_progression_completed(prog: Progression):
   $Center.remove_child(prog)
+
+func colorize(color: Color):
+  center_bg.color = color.lightened(0.2)
