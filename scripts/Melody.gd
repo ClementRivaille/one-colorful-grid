@@ -7,6 +7,7 @@ var phrase := []
 var waiting := 0
 var quarter_only := false
 var playing := false
+var active := false
 
 var phrase_min_length := 3
 var max_add := 2
@@ -27,8 +28,16 @@ func clear():
 func init():
   waiting = phrase_interval + 1
   playing = false
+  active = true
+
+func deactivate():
+  clear()
+  active = false
 
 func on_beat(beat):
+  if !active:
+    return
+
   if waiting > 0:
     waiting -= 1
   

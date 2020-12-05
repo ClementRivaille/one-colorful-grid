@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/Music.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/SimpleSampler/multisampler.gd" type="Script" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://scripts/Main.gd" type="Script" id=10]
 [ext_resource path="res://sfx/ChipShop_GB_Perc_01.wav" type="AudioStream" id=11]
 [ext_resource path="res://scripts/SFX.gd" type="Script" id=12]
+[ext_resource path="res://sfx/success.ogg" type="AudioStream" id=13]
+[ext_resource path="res://scenes/Shield.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scripts/Shields.gd" type="Script" id=15]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 3 )
@@ -68,3 +71,63 @@ script = ExtResource( 12 )
 [node name="error" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 11 )
 volume_db = -5.279
+
+[node name="success" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 13 )
+volume_db = -5.279
+
+[node name="Shields" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shield" parent="Shields" instance=ExtResource( 14 )]
+visible = false
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.25
+anchor_bottom = 0.25
+margin_left = -135.0
+margin_top = -135.0
+margin_right = 65.0
+margin_bottom = 65.0
+
+[node name="Shield2" parent="Shields" instance=ExtResource( 14 )]
+visible = false
+anchor_left = 0.75
+anchor_top = 0.75
+anchor_right = 0.75
+anchor_bottom = 0.75
+margin_left = -65.0
+margin_top = -65.0
+margin_right = 135.0
+margin_bottom = 135.0
+
+[node name="Shield3" parent="Shields" instance=ExtResource( 14 )]
+visible = false
+anchor_left = 0.25
+anchor_top = 0.75
+anchor_right = 0.25
+anchor_bottom = 0.75
+margin_left = -135.0
+margin_top = -65.0
+margin_right = 65.0
+margin_bottom = 135.0
+
+[node name="Shield4" parent="Shields" instance=ExtResource( 14 )]
+visible = false
+anchor_left = 0.75
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.25
+margin_left = -65.0
+margin_top = -135.0
+margin_right = 135.0
+margin_bottom = 65.0
+
+[node name="View" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true

@@ -14,6 +14,9 @@ onready var top_center: ColorRect = $Center/Top
 var pipes: Array
 var center: Array
 
+var progression : Progression
+export(PackedScene) var progression_prefab: PackedScene
+
 func _ready():
   pipes = [bottom_pipe, left_pipe, right_pipe, top_pipe]
   center = [bottom_center, left_center, right_center, top_center]
@@ -37,3 +40,23 @@ func press(note: int):
 func release(note: int):
   var position: ColorRect = center[note]
   position.visible = false
+  
+func create_progression(max_score: int):
+  progression = progression_prefab.instance()
+  progression.init(max_score)
+  $Center.add_child(progression)
+  progression.connect("completed", self, "on_progression_completed")
+
+func progress():
+  progression.progress()
+  
+func reset_progress(max_score: int = 0):
+  progression.reset()
+  if max_score > 0:
+    progression.init(max_score)
+    
+func progress_complete():
+  progression.complete()
+
+func on_progression_completed(prog: Progression):
+  $Center.remove_child(prog)

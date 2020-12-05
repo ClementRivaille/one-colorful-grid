@@ -3,3 +3,6 @@ class_name SFX
 
 func play_error():
   $error.play()
+
+func play_success():
+  $success.play()
