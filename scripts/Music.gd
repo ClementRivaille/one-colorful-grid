@@ -66,12 +66,12 @@ func on_end(_song):
   
   emit_signal("end")
 
-func on_beat(_beat):
+func on_beat(beat):
   if ended && !credits:
     mixing_desk.queue_bar_transition(0)
     credits = true
     
-  emit_signal("beat")
+  emit_signal("beat", beat - 1)
 
 func on_bar(bar):
   if credits:
@@ -84,4 +84,4 @@ func on_bar(bar):
 
 
 func _on_AudioStreamPlayer_started():
-  print("that works!")
+  pass
