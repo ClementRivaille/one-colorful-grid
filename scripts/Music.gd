@@ -4,7 +4,6 @@ class_name Music
 signal beat
 signal bar
 signal end
-
 signal beat_ended
 
 onready var mixing_desk = $MixingDesk

@@ -49,10 +49,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Pipe.gd"
 }, {
+"base": "Node2D",
+"class": "SFX",
+"language": "GDScript",
+"path": "res://scripts/SFX.gd"
+}, {
 "base": "AudioStreamPlayer",
 "class": "Sampler",
 "language": "GDScript",
 "path": "res://addons/SimpleSampler/sampler.gd"
+}, {
+"base": "Node2D",
+"class": "Validator",
+"language": "GDScript",
+"path": "res://scripts/Validator.gd"
 }, {
 "base": "Control",
 "class": "Visualizer",
@@ -68,7 +78,9 @@ _global_script_class_icons={
 "NoteSample": "",
 "NoteValueCalculator": "",
 "Pipe": "",
+"SFX": "",
 "Sampler": "",
+"Validator": "",
 "Visualizer": ""
 }
 

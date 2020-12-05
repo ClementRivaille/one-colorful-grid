@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ChipShop_GB_Lead_D#_05.wav-7162ae18f66ae4be5c057e26408b2b66.sample"
+
+[deps]
+
+source_file="res://samples/player/ChipShop_GB_Lead_D#_05.wav"
+dest_files=[ "res://.import/ChipShop_GB_Lead_D#_05.wav-7162ae18f66ae4be5c057e26408b2b66.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
