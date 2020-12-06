@@ -10,6 +10,7 @@ onready var shields: Shield = $Shields
 onready var background: Background = $Background
 onready var view: View = $View
 onready var credits: Credits = $Credits
+onready var title: Control = $Title
 
 var playing := false
 
@@ -63,6 +64,7 @@ func _input(event: InputEvent):
       
 func start_game():
   level = 1
+  title.visible = false
   setup_level()
   melody.init()
   shields.add_shield()
@@ -100,6 +102,7 @@ func on_miss():
     if level == 0:
       melody.deactivate()
       visualizer.reset_progress()
+      title.visible = true
     else:
       visualizer.reset_progress(completion_needed)
 
@@ -177,10 +180,20 @@ func start_credits():
   credits.display_title()
   yield(music, "bar")
   yield(music, "bar")
+  credits.display_colorful_dimension()
   yield(music, "bar")
+  yield(music, "bar")
+  credits.display_jam()
+  yield(music, "bar")
+  yield(music, "bar")
+  if shields.qt < 4:
+    credits.display_bonus()
+  else:
+    credits.display_free_mode()
   music.stop_after_loop()
-  yield(music, "end")
   
+  yield(music, "end") 
+  sfx.play_end()
   start_over()
   
 func start_over():
@@ -191,6 +204,7 @@ func start_over():
   
   last_bar = false
   beats_end = 0
+  title.visible = true
   
   music.reset()
   shields.clear()

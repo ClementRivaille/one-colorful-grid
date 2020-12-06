@@ -6,3 +6,6 @@ func play_error():
 
 func play_success():
   $success.play()
+  
+func play_end():
+  $end.play()
