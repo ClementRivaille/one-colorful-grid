@@ -17,6 +17,7 @@ var playing := false
 var level := 0
 var completion_needed := 0
 var level_completions := [0,8,16,32,32,4]
+var free_mode := false
 
 export(Array, Color) var level_colors: Array
 
@@ -42,6 +43,8 @@ func _input(event: InputEvent):
     elif level == 0:
       start_game()
       visualizer.reset_progress(completion_needed)
+    elif free_mode:
+      exit_freemode()
     
   if playing && level > 0:
     if event.is_action_pressed("ui_down"):
@@ -77,11 +80,15 @@ func play_lead(note_idx: int):
   
 func play_note(value: int):
   visualizer.press(value)
-  var valid = validator.read_note(value, music.get_active_beat())
-  if valid == Validator.validation.INVALID:
-    on_miss()
-  elif valid == Validator.validation.VALID:
-    validate_note(value)
+  if !free_mode:
+    var valid = validator.read_note(value, music.get_active_beat())
+    if valid == Validator.validation.INVALID:
+      on_miss()
+    elif valid == Validator.validation.VALID:
+      validate_note(value)
+  else:
+    visualizer.validate_note(value)
+    instrument.play_player(music.current_bar, value)
 
 func on_miss():
   sfx.play_error()
@@ -188,13 +195,17 @@ func start_credits():
   yield(music, "bar")
   if shields.qt < 4:
     credits.display_bonus()
+    music.stop_after_loop()
   else:
     credits.display_free_mode()
-  music.stop_after_loop()
-  
-  yield(music, "end") 
-  sfx.play_end()
-  start_over()
+    free_mode = true
+
+  yield(music, "end")
+  if !free_mode: 
+    sfx.play_end()
+    start_over()
+  else:
+    enter_freemode()
   
 func start_over():
   playing = false
@@ -209,3 +220,20 @@ func start_over():
   music.reset()
   shields.clear()
   credits.hide()
+  
+func enter_freemode():
+  background.color = level_colors[6]
+  visualizer.colorize(level_colors[6])
+  instrument.change_instruments(4)
+  credits.hide()
+  last_bar = false
+  beats_end = 0
+  free_mode = true
+  
+func exit_freemode():
+  level = 0
+  setup_level()
+  music.reset_track_speed()
+  title.visible = true
+  shields.clear()
+  free_mode = false

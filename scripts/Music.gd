@@ -60,6 +60,7 @@ func on_end(_song):
     yield(mixing_desk, "bar")
     layers.track_speed = 1.0
     layers.layer_max = 5
+    current_bar = 0
 
 func on_beat(beat):
   emit_signal("beat", beat - 1)
@@ -85,12 +86,10 @@ func get_active_beat() -> int:
 func reset():
   current_bar = 0
   ending = false
-  ending = false
   metronome.disconnect("beat_ended", self, "on_beat_ended")
   metronome = null
   
-  layers.track_speed = 0.8
-  end_layer.track_speed = 0.6
+  reset_track_speed()
   layers.layer_max = 1
   var layers_players:Array = layers.get_children()
   for i in range(0, layers_players.size()):
@@ -103,3 +102,7 @@ func reset():
     l.volume_db = -65
     
   mixing_desk.init_song(0)
+
+func reset_track_speed():
+  layers.track_speed = 0.8
+  end_layer.track_speed = 0.6

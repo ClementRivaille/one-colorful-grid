@@ -18,16 +18,16 @@
 [ext_resource path="res://scripts/View.gd" type="Script" id=17]
 [ext_resource path="res://scenes/Pipe.tscn" type="PackedScene" id=18]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 130
 extra_spacing_char = -5
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 130
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 130
 font_data = ExtResource( 3 )
 
@@ -38,7 +38,7 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-level_colors = [ Color( 0, 0, 0, 1 ), Color( 0.180392, 0.180392, 0.180392, 1 ), Color( 0.121569, 0.129412, 0.407843, 1 ), Color( 0.0862745, 0.356863, 0.254902, 1 ), Color( 0.376471, 0.0352941, 0.180392, 1 ), Color( 1, 1, 1, 1 ) ]
+level_colors = [ Color( 0, 0, 0, 1 ), Color( 0.180392, 0.180392, 0.180392, 1 ), Color( 0.121569, 0.129412, 0.407843, 1 ), Color( 0.0862745, 0.356863, 0.254902, 1 ), Color( 0.376471, 0.0352941, 0.180392, 1 ), Color( 1, 1, 1, 1 ), Color( 0.313726, 0.466667, 0.529412, 1 ) ]
 
 [node name="Music" parent="." instance=ExtResource( 1 )]
 
@@ -171,7 +171,7 @@ anchor_bottom = 1.0
 anchor_right = 1.0
 anchor_bottom = 0.3
 margin_right = 32.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "one"
 align = 1
 valign = 2
@@ -183,7 +183,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 2.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "colorful"
 align = 1
 valign = 1
@@ -198,7 +198,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 13.0
 margin_right = 20.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "grid"
 align = 1
 max_lines_visible = 3
