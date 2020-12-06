@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ChipShop_YM_Synth_A#_01.wav-d8ab956c7e2555cdae0e88e92f498c74.sample"
+
+[deps]
+
+source_file="res://samples/lead/ChipShop_YM_Synth_A#_01.wav"
+dest_files=[ "res://.import/ChipShop_YM_Synth_A#_01.wav-d8ab956c7e2555cdae0e88e92f498c74.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

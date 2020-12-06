@@ -1,8 +1,26 @@
 extends Node2D
 class_name Instruments
 
-onready var lead: Multisampler = $Lead
-onready var player: Multisampler = $Player
+onready var lead: Multisampler = $Lead/Lead1
+onready var player: Multisampler = $Player/Player1
+
+onready var lead_samplers := [
+  $Lead/Lead1,
+  $Lead/Lead1,
+  $Lead/Lead2,
+  $Lead/Lead3,
+  $Lead/Lead4,
+  $Lead/Lead5,
+]
+
+onready var player_samplers := [
+  $Player/Player1,
+  $Player/Player1,
+  $Player/Player2,
+  $Player/Player3,
+  $Player/Player4,
+  $Player/Player5,
+]
 
 var lead_notes := [
   [["A", 3], ["C", 4], ["E", 4], ["A", 4]],
@@ -27,3 +45,7 @@ func play_player(bar: int, note_idx: int):
   var notes: Array = player_notes[bar]
   var note: Array = notes[note_idx]
   player.play_note(note[0], note[1])
+
+func change_instruments(level: int):
+  lead = lead_samplers[level]
+  player = player_samplers[level]

@@ -13,7 +13,6 @@ var metronome: Metronome
 
 var current_bar := 0
 
-var index := 1
 var ending := false
 
 func _ready():
@@ -41,9 +40,8 @@ func trigger_end():
   end_layer.layer_max = 0;
   
 func cancel_end():
-  index = 4;
   layers.track_speed = 0.8;
-  layers.layer_max = index;
+  layers.layer_max = 4;
   end_layer.layer_max = -1;
   ending = false
   
@@ -86,7 +84,7 @@ func get_active_beat() -> int:
 
 func reset():
   current_bar = 0
-  index = 1
+  ending = false
   ending = false
   metronome.disconnect("beat_ended", self, "on_beat_ended")
   metronome = null

@@ -15,7 +15,7 @@ onready var left_bar: ColorRect = $Left
 onready var tween:Tween = $Tween
 
 func init(nb_steps: int):
-  side_steps = nb_steps / 4
+  side_steps = int(max(nb_steps / 4, 1))
   step = 1.0 / float(side_steps)
   score = 0
 

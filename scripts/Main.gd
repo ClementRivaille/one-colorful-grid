@@ -132,6 +132,7 @@ func setup_level():
   completion_needed = level_completions[level]
   melody.set_difficulty(level)
   background.set_color(level_colors[level])
+  instrument.change_instruments(level)
   if level < LAST_LEVEL:
     visualizer.colorize(level_colors[level])
   else:
