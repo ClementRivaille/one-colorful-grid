@@ -27,6 +27,8 @@ var beats_end := 0
 
 func _ready():
   randomize()
+  Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
   music.connect("beat", melody, "on_beat")
   melody.connect("play", self, "play_lead")
   music.connect("beat_ended", validator, "on_beat_end")
@@ -45,6 +47,11 @@ func _input(event: InputEvent):
       visualizer.reset_progress(completion_needed)
     elif free_mode:
       exit_freemode()
+      
+  if event.is_action_pressed("ui_cancel"):
+    get_tree().call_deferred("quit")
+  if event.is_action_pressed("fullscreen"):
+    OS.window_fullscreen = !OS.window_fullscreen
     
   if playing && level > 0:
     if event.is_action_pressed("ui_down"):
