@@ -15,6 +15,7 @@ var playing := false
 
 var level := 0
 var completion_needed := 0
+var level_completions := [0,8,16,32,32,4]
 
 export(Array, Color) var level_colors: Array
 
@@ -51,14 +52,14 @@ func _input(event: InputEvent):
     if event.is_action_pressed("ui_up"):
       play_note(3)
     
-    if event.is_action_released("ui_down"):
-      visualizer.release(0)
-    if event.is_action_released("ui_left"):
-      visualizer.release(1)
-    if event.is_action_released("ui_right"):
-      visualizer.release(2)
-    if event.is_action_released("ui_up"):
-      visualizer.release(3)
+  if event.is_action_released("ui_down"):
+    visualizer.release(0)
+  if event.is_action_released("ui_left"):
+    visualizer.release(1)
+  if event.is_action_released("ui_right"):
+    visualizer.release(2)
+  if event.is_action_released("ui_up"):
+    visualizer.release(3)
       
 func start_game():
   level = 1
@@ -112,7 +113,7 @@ func validate_note(value: int):
     if completion_needed <= 0:
       visualizer.clear()
       validator.clear()
-      melody.clear()
+      melody.clear(2)
       
       level += 1
       sfx.play_success()
@@ -128,7 +129,8 @@ func validate_note(value: int):
 
 func setup_level():
   music.set_layer(level)
-  completion_needed = 4
+  completion_needed = level_completions[level]
+  melody.set_difficulty(level)
   background.set_color(level_colors[level])
   if level < LAST_LEVEL:
     visualizer.colorize(level_colors[level])
