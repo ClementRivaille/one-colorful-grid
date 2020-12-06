@@ -9,21 +9,27 @@ onready var sfx: SFX = $SFX
 onready var shields: Shield = $Shields
 onready var background: Background = $Background
 onready var view: View = $View
+onready var credits: Credits = $Credits
 
 var playing := false
 
 var level := 0
 var completion_needed := 0
 
-var LAST_LEVEL = 5
+export(Array, Color) var level_colors: Array
+
+var LAST_LEVEL := 5
+var last_bar := false
+var beats_end := 0
 
 func _ready():
+  randomize()
   music.connect("beat", melody, "on_beat")
   melody.connect("play", self, "play_lead")
   music.connect("beat_ended", validator, "on_beat_end")
   validator.connect("missed", self, "on_miss")
   melody.init()
-  visualizer.colorize(background.color)
+  visualizer.colorize(level_colors[0])
   
 func _input(event: InputEvent):
   if event.is_action_pressed("ui_accept"):
@@ -81,9 +87,12 @@ func on_miss():
   melody.clear()
   view.shake()
   
-  if shields.has_shield():
+  if shields.has_shield() && level < LAST_LEVEL:
     shields.remove_shield()
   else:
+    if level == LAST_LEVEL:
+      cancel_end()
+
     level -= 1
     setup_level()
     
@@ -97,23 +106,89 @@ func validate_note(value: int):
   visualizer.validate_note(value)
   instrument.play_player(music.current_bar, value)
   
-  completion_needed -= 1
-  visualizer.progress()
-  if completion_needed <= 0:
-    visualizer.clear()
-    validator.clear()
-    melody.clear()
-    
-    level += 1
-    sfx.play_success()
-    shields.add_shield()
-    setup_level()
-    
-    visualizer.progress_complete()
-    visualizer.create_progression(completion_needed)
+  if level < LAST_LEVEL:
+    completion_needed -= 1
+    visualizer.progress()
+    if completion_needed <= 0:
+      visualizer.clear()
+      validator.clear()
+      melody.clear()
+      
+      level += 1
+      sfx.play_success()
+      setup_level()
+      
+      visualizer.progress_complete()
+      visualizer.create_progression(completion_needed)
+      
+      if level == LAST_LEVEL:
+        setup_end()
+      else:
+        shields.add_shield()
 
 func setup_level():
   music.set_layer(level)
-  completion_needed = 8
-  background.set_level(level)
-  visualizer.colorize(background.color)
+  completion_needed = 4
+  background.set_color(level_colors[level])
+  if level < LAST_LEVEL:
+    visualizer.colorize(level_colors[level])
+  else:
+    visualizer.colorize(Color(0,0,0), true)
+
+func setup_end():
+  music.trigger_end()
+  last_bar = false
+  beats_end = 0
+  music.connect("beat_ended", self, "on_end_beat")
+  music.connect("end", self, "on_end_loop")
+  
+func cancel_end():
+  music.cancel_end()
+  music.disconnect("beat_ended", self, "on_end_beat")
+  music.disconnect("end", self, "on_end_loop")
+  
+func on_end_beat(beat):
+  beats_end += 1
+  if last_bar:
+    if beat == 29:
+      melody.clear()
+    if beat == 31:
+      end()
+  
+func on_end_loop():
+  if beats_end > 16:
+    last_bar = true  
+
+func end():
+  music.validate_end()
+  music.disconnect("beat_ended", self, "on_end_beat")
+  music.disconnect("end", self, "on_end_loop")
+  melody.deactivate()
+  
+  music.connect("end", self, "start_credits")
+  
+func start_credits():
+  music.disconnect("end", self, "start_credits")
+  credits.init()
+  yield(music, "bar")
+  credits.display_title()
+  yield(music, "bar")
+  yield(music, "bar")
+  yield(music, "bar")
+  music.stop_after_loop()
+  yield(music, "end")
+  
+  start_over()
+  
+func start_over():
+  playing = false
+  level = 0
+  background.color = level_colors[0]
+  visualizer.colorize(level_colors[0])
+  
+  last_bar = false
+  beats_end = 0
+  
+  music.reset()
+  shields.clear()
+  credits.hide()

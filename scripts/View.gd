@@ -11,8 +11,9 @@ func shake():
   timer.start()
   yield(timer, "timeout")
   shaking = false
+  position = Vector2(0,0)
 
 func _process(_delta):
   if shaking:
-    position = Vector2(randf()*STRENGTH, randf()*STRENGTH)
+    position = Vector2(-STRENGTH + randf()*STRENGTH*2, -STRENGTH + randf()*STRENGTH)
     

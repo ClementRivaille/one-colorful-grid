@@ -33,6 +33,7 @@ func clear():
 func validate_note(note: int):
   var pipe: Pipe = pipes[note]
   pipe.remove_line()
+  pipe.success()
 
 func press(note: int):
   var position: ColorRect = center[note]
@@ -64,5 +65,8 @@ func progress_complete():
 func on_progression_completed(prog: Progression):
   $Center.remove_child(prog)
 
-func colorize(color: Color):
-  center_bg.color = color.lightened(0.2)
+func colorize(color: Color, keep: bool = false):
+  if !keep:
+    center_bg.color = color.lightened(0.2)
+  else:
+    center_bg.color = color

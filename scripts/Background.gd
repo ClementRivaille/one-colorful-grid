@@ -1,7 +1,8 @@
 extends ColorRect
 class_name Background
 
-export(Array, Color) var colors: Array
+onready var tween: Tween = $Tween
 
-func set_level(level: int):
-  color = colors[level]
+func set_color(value: Color):
+  tween.interpolate_property(self, "color", color, value, 0.4, Tween.TRANS_SINE, Tween.EASE_OUT)
+  tween.start()

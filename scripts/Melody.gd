@@ -5,7 +5,7 @@ signal play
 
 var phrase := []
 var waiting := 0
-var quarter_only := false
+var quarter_only := true
 var playing := false
 var active := false
 

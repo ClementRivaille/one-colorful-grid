@@ -14,3 +14,8 @@ func remove_shield():
 
 func has_shield():
   return qt > 0
+
+func clear():
+  qt = 0
+  for s in shields:
+    s.visible = false

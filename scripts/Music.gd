@@ -24,9 +24,12 @@ func _ready():
   mixing_desk.connect("beat", self, "on_beat")
 
 func start():
+  mixing_desk.play_mode = 1
   mixing_desk.start_alone(0,0)
 
-func stop_after_bar():
+func stop_after_loop():
+  mixing_desk.play_mode = 0
+  yield(mixing_desk, "end")
   mixing_desk.stop(0)
   
 func set_layer(index: int):
@@ -66,10 +69,9 @@ func on_beat(beat):
 func on_bar(bar):
   current_bar = (bar - 1)%4
   emit_signal("bar", current_bar)
-  print(current_bar)
 
 func on_metronome_started(instance: Metronome):
-  if metronome:
+  if metronome && metronome != null:
     metronome.disconnect("beat_ended", self, "on_beat_ended")
   metronome = instance
   metronome.connect("beat_ended", self, "on_beat_ended")
@@ -81,3 +83,25 @@ func get_active_beat() -> int:
   if metronome && metronome.playing:
     return metronome.get_active_beat()
   return -1
+
+func reset():
+  current_bar = 0
+  index = 1
+  ending = false
+  metronome.disconnect("beat_ended", self, "on_beat_ended")
+  metronome = null
+  
+  layers.track_speed = 0.8
+  end_layer.track_speed = 0.6
+  layers.layer_max = 1
+  var layers_players:Array = layers.get_children()
+  for i in range(0, layers_players.size()):
+    var player: AudioStreamPlayer = layers_players[i]
+    if i < 2:
+      player.volume_db = 0
+    else:
+      player.volume_db = -65.0
+  for l in end_layer.get_children():
+    l.volume_db = -65
+    
+  mixing_desk.init_song(0)

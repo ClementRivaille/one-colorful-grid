@@ -5,8 +5,13 @@ var duration := 60.0 / 115.0
 
 export(PackedScene) var line_prefab: PackedScene
 export(Color) var line_color := Color(1,1,1,1)
+onready var success_bar: ColorRect = $success
 
 onready var lines: Control = $Lines
+onready var tween: Tween = $Tween
+
+func _ready():
+  success_bar.color = line_color.lightened(0.5)
 
 func add_line():
   var line: ColorRect = line_prefab.instance()
@@ -26,3 +31,9 @@ func remove_line():
     var tween:Tween = line.get_child(0)
     tween.stop_all()
     lines.remove_child(line)
+    
+func success():
+  tween.interpolate_property(success_bar, "modulate",
+    Color(1,1,1,0.4), Color(1,1,1,0),
+    0.4, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+  tween.start()
