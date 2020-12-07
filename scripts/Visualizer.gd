@@ -48,7 +48,7 @@ func create_progression(max_score: int):
   progression.init(max_score)
   $Center.add_child(progression)
   progression.connect("completed", self, "on_progression_completed")
-  progression.colorize(center_bg.color.darkened(0.3))
+  progression.colorize(center_bg.modulate.darkened(0.3))
 
 func progress():
   progression.progress()
@@ -57,7 +57,7 @@ func reset_progress(max_score: int = 0):
   progression.reset()
   if max_score > 0:
     progression.init(max_score)
-  progression.colorize(center_bg.color.darkened(0.3))
+  progression.colorize(center_bg.modulate.darkened(0.3))
     
 func progress_complete():
   progression.complete()
@@ -67,6 +67,6 @@ func on_progression_completed(prog: Progression):
 
 func colorize(color: Color, keep: bool = false):
   if !keep:
-    center_bg.color = color.lightened(0.2)
+    center_bg.modulate = color.lightened(0.2)
   else:
-    center_bg.color = color
+    center_bg.modulate = color

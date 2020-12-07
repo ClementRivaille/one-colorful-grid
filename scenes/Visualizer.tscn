@@ -7,6 +7,8 @@
 [node name="Visualizer" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -1.0
+margin_right = -1.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -16,7 +18,7 @@ progression_prefab = ExtResource( 3 )
 [node name="Bottom" parent="." instance=ExtResource( 1 )]
 anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.985
 anchor_bottom = 1.0
 rect_rotation = -90.0
 line_color = Color( 0.87451, 0.443137, 0.423529, 1 )
@@ -26,14 +28,14 @@ line_color = Color( 0.847059, 0.847059, 0.329412, 1 )
 
 [node name="Right" parent="." instance=ExtResource( 1 )]
 anchor_left = 1.0
-anchor_right = 1.5
+anchor_right = 1.485
 rect_scale = Vector2( -1, 1 )
 line_color = Color( 0.780392, 0.364706, 0.72549, 1 )
 
 [node name="Top" parent="." instance=ExtResource( 1 )]
 anchor_left = 0.5
 anchor_top = 0.0
-anchor_right = 1.0
+anchor_right = 0.985
 anchor_bottom = 0.0
 rect_rotation = 90.0
 line_color = Color( 0.411765, 0.419608, 0.870588, 1 )
@@ -50,7 +52,63 @@ __meta__ = {
 [node name="background" type="ColorRect" parent="Center"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.298039, 0.298039, 0.298039, 1 )
+color = Color( 1, 1, 1, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="center" type="ColorRect" parent="Center/background"]
+anchor_left = 0.4
+anchor_top = 0.4
+anchor_right = 0.6
+anchor_bottom = 0.6
+
+[node name="top-left" type="ColorRect" parent="Center/background"]
+anchor_right = 0.45
+anchor_bottom = 0.45
+
+[node name="top-right" type="ColorRect" parent="Center/background"]
+anchor_left = 0.55
+anchor_right = 1.0
+anchor_bottom = 0.45
+
+[node name="bottom-right" type="ColorRect" parent="Center/background"]
+anchor_left = 0.55
+anchor_top = 0.55
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="bottom-left" type="ColorRect" parent="Center/background"]
+anchor_top = 0.55
+anchor_right = 0.45
+anchor_bottom = 1.0
+
+[node name="left" type="ColorRect" parent="Center/background"]
+anchor_right = 0.15
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="top" type="ColorRect" parent="Center/background"]
+anchor_right = 1.0
+anchor_bottom = 0.15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="right" type="ColorRect" parent="Center/background"]
+anchor_left = 0.85
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bottom" type="ColorRect" parent="Center/background"]
+anchor_top = 0.85
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
