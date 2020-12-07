@@ -1,21 +1,16 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://addons/SimpleSampler/sample_resource.gd" type="Script" id=1]
 [ext_resource path="res://samples/lead/vibraphone/ChipShop_Ym_Multi_Vibra_A1.wav" type="AudioStream" id=2]
-[ext_resource path="res://samples/lead/organ/ChipShop_Ym_Multi_Organ_A2.wav" type="AudioStream" id=3]
 [ext_resource path="res://addons/SimpleSampler/multisampler.gd" type="Script" id=4]
 [ext_resource path="res://scripts/Instruments.gd" type="Script" id=5]
 [ext_resource path="res://samples/player/ChipShop_GB_Lead_D#_05.wav" type="AudioStream" id=6]
 [ext_resource path="res://samples/lead/ChipShop_YM_Synth_D#_13.wav" type="AudioStream" id=7]
 [ext_resource path="res://samples/lead/vibraphone/ChipShop_Ym_Multi_Vibra_G1.wav" type="AudioStream" id=8]
-[ext_resource path="res://samples/lead/organ/ChipShop_Ym_Multi_Organ_G1.wav" type="AudioStream" id=9]
 [ext_resource path="res://samples/lead/ChipShop_YM_Synth_G_28.wav" type="AudioStream" id=10]
-[ext_resource path="res://samples/lead/organ/ChipShop_Ym_Multi_Organ_E2.wav" type="AudioStream" id=11]
 [ext_resource path="res://samples/lead/vibraphone/ChipShop_Ym_Multi_Vibra_A2.wav" type="AudioStream" id=12]
 [ext_resource path="res://samples/lead/vibraphone/ChipShop_Ym_Multi_Vibra_C1.wav" type="AudioStream" id=13]
 [ext_resource path="res://samples/player/ChipShop_SID_Lead_B_07.wav" type="AudioStream" id=14]
-[ext_resource path="res://samples/lead/organ/ChipShop_Ym_Multi_Organ_C2.wav" type="AudioStream" id=15]
-[ext_resource path="res://samples/lead/organ/ChipShop_Ym_Multi_Organ_A1.wav" type="AudioStream" id=16]
 [ext_resource path="res://samples/lead/vibraphone/ChipShop_Ym_Multi_Vibra_E1.wav" type="AudioStream" id=17]
 [ext_resource path="res://samples/lead/ChipShop_YM_Synth_A#_01.wav" type="AudioStream" id=18]
 [ext_resource path="res://samples/player/ChipShop_SID_Lead_A_01.wav" type="AudioStream" id=19]
@@ -34,95 +29,65 @@ octave = 2
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 1 )
-stream = ExtResource( 16 )
-tone = "A"
-octave = 4
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 1 )
-stream = ExtResource( 3 )
-tone = "A"
-octave = 5
-
-[sub_resource type="Resource" id=5]
-script = ExtResource( 1 )
-stream = ExtResource( 15 )
-tone = "C"
-octave = 5
-
-[sub_resource type="Resource" id=6]
-script = ExtResource( 1 )
-stream = ExtResource( 11 )
-tone = "E"
-octave = 5
-
-[sub_resource type="Resource" id=7]
-script = ExtResource( 1 )
-stream = ExtResource( 9 )
-tone = "G"
-octave = 4
-
-[sub_resource type="Resource" id=19]
-script = ExtResource( 1 )
 stream = ExtResource( 18 )
 tone = "A#"
 octave = 3
 
-[sub_resource type="Resource" id=8]
+[sub_resource type="Resource" id=4]
 script = ExtResource( 1 )
 stream = ExtResource( 2 )
 tone = "A"
 octave = 3
 
-[sub_resource type="Resource" id=9]
+[sub_resource type="Resource" id=5]
 script = ExtResource( 1 )
 stream = ExtResource( 12 )
 tone = "A"
 octave = 4
 
-[sub_resource type="Resource" id=10]
+[sub_resource type="Resource" id=6]
 script = ExtResource( 1 )
 stream = ExtResource( 13 )
 tone = "C"
 octave = 3
 
-[sub_resource type="Resource" id=11]
+[sub_resource type="Resource" id=7]
 script = ExtResource( 1 )
 stream = ExtResource( 17 )
 tone = "E"
 octave = 3
 
-[sub_resource type="Resource" id=12]
+[sub_resource type="Resource" id=8]
 script = ExtResource( 1 )
 stream = ExtResource( 8 )
 tone = "G"
 octave = 3
 
-[sub_resource type="Resource" id=14]
+[sub_resource type="Resource" id=9]
 script = ExtResource( 1 )
 stream = ExtResource( 6 )
 tone = "D#"
 octave = 4
 
-[sub_resource type="Resource" id=15]
+[sub_resource type="Resource" id=10]
 script = ExtResource( 1 )
 stream = ExtResource( 6 )
 tone = "D#"
 octave = 4
 
-[sub_resource type="Resource" id=16]
+[sub_resource type="Resource" id=11]
 script = ExtResource( 1 )
 stream = ExtResource( 19 )
 tone = "A"
 octave = 4
 
-[sub_resource type="Resource" id=17]
+[sub_resource type="Resource" id=12]
 script = ExtResource( 1 )
 stream = ExtResource( 14 )
 tone = "B"
 octave = 4
 
-[sub_resource type="Resource" id=18]
+[sub_resource type="Resource" id=13]
 script = ExtResource( 1 )
 stream = ExtResource( 6 )
 tone = "D#"
@@ -158,20 +123,11 @@ script = ExtResource( 4 )
 samples = [ SubResource( 2 ) ]
 max_notes = 3
 
-[node name="Lead4_OLD" type="AudioStreamPlayer" parent="Lead"]
-volume_db = -2.0
-bus = "Lead4"
-script = ExtResource( 4 )
-samples = [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ]
-sustain = 0.1
-release = 0.5
-max_notes = 3
-
 [node name="Lead4" type="AudioStreamPlayer" parent="Lead"]
 volume_db = -3.5
 bus = "Lead4"
 script = ExtResource( 4 )
-samples = [ SubResource( 19 ) ]
+samples = [ SubResource( 3 ) ]
 sustain = 0.1
 release = 0.5
 max_notes = 3
@@ -180,7 +136,7 @@ max_notes = 3
 volume_db = -3.0
 bus = "Lead5"
 script = ExtResource( 4 )
-samples = [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ]
+samples = [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ]
 max_notes = 3
 
 [node name="Player" type="Node2D" parent="."]
@@ -189,7 +145,7 @@ max_notes = 3
 volume_db = -8.0
 bus = "Instruments"
 script = ExtResource( 4 )
-samples = [ SubResource( 14 ) ]
+samples = [ SubResource( 9 ) ]
 sustain = 0.05
 release = 0.4
 max_notes = 3
@@ -198,7 +154,7 @@ max_notes = 3
 volume_db = -8.0
 bus = "Player2"
 script = ExtResource( 4 )
-samples = [ SubResource( 15 ) ]
+samples = [ SubResource( 10 ) ]
 sustain = 0.1
 release = 0.9
 max_notes = 3
@@ -207,7 +163,7 @@ max_notes = 3
 volume_db = -5.0
 bus = "Instruments"
 script = ExtResource( 4 )
-samples = [ SubResource( 16 ) ]
+samples = [ SubResource( 11 ) ]
 sustain = 0.1
 release = 0.6
 max_notes = 3
@@ -216,7 +172,7 @@ max_notes = 3
 volume_db = -2.0
 bus = "Player4"
 script = ExtResource( 4 )
-samples = [ SubResource( 17 ) ]
+samples = [ SubResource( 12 ) ]
 sustain = 0.1
 release = 1.2
 max_notes = 3
@@ -225,7 +181,7 @@ max_notes = 3
 volume_db = -8.0
 bus = "Player5"
 script = ExtResource( 4 )
-samples = [ SubResource( 18 ) ]
+samples = [ SubResource( 13 ) ]
 sustain = 0.05
 release = 0.4
 max_notes = 3
