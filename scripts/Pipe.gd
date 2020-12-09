@@ -18,7 +18,9 @@ func add_line():
   line.color = line_color
   lines.add_child(line)
   var line_tween: Tween = line.get_child(0)
-  line_tween.interpolate_property(line, "anchor_left", 0.0, 1.0, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+  line_tween.interpolate_property(line, "anchor_left",
+    0.0, 1.0,
+    duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
   line_tween.start()
 
 func clear():

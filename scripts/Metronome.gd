@@ -15,7 +15,7 @@ var index := -1
 var song_length = 32
 
 var active_beat := -1
-var MARGIN := .07
+var MARGIN := .06
 var accepting := false
 
 func _ready():
