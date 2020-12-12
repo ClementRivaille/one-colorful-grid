@@ -15,7 +15,7 @@ var index := -1
 var song_length = 32
 
 var MARGIN_NORMAL := .06
-var MARGIN_SMALL := .05
+var MARGIN_SMALL := .055
 
 var active_beat := -1
 var margin := MARGIN_NORMAL
