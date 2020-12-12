@@ -151,6 +151,67 @@ anchor_top = 0.25
 anchor_right = 0.75
 anchor_bottom = 0.25
 
+[node name="HardMode" type="Control" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.180392 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="HardMode"]
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.15
+anchor_bottom = 0.15
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="HardMode"]
+anchor_left = 0.85
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.15
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="HardMode"]
+anchor_left = 0.1
+anchor_top = 0.85
+anchor_right = 0.15
+anchor_bottom = 0.9
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="HardMode"]
+anchor_left = 0.85
+anchor_top = 0.85
+anchor_right = 0.9
+anchor_bottom = 0.9
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="View" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true

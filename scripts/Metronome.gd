@@ -14,8 +14,11 @@ var last_beat := 0.0
 var index := -1
 var song_length = 32
 
+var MARGIN_NORMAL := .06
+var MARGIN_SMALL := .05
+
 var active_beat := -1
-var MARGIN := .06
+var margin := MARGIN_NORMAL
 var accepting := false
 
 func _ready():
@@ -43,7 +46,7 @@ func _process(_delta):
   if playing:
     var position := get_playback_position()
     
-    if position >= (next_beat - MARGIN) && position < next_beat && !accepting :
+    if position >= (next_beat - margin) && position < next_beat && !accepting :
       accepting = true
       active_beat = (index + 1) % song_length
       if debugging:
@@ -56,7 +59,7 @@ func _process(_delta):
         last_beat = next_beat
         next_beat += beat_length
         
-    if position >= (last_beat + MARGIN) && position < (next_beat - MARGIN) && accepting:
+    if position >= (last_beat + margin) && position < (next_beat - margin) && accepting:
       accepting = false
       emit_signal("beat_ended", active_beat)
       active_beat = -1
@@ -65,3 +68,9 @@ func _process(_delta):
 
 func get_active_beat() -> int:
   return active_beat
+
+func set_precision(precise: bool):
+  if precise:
+    margin = MARGIN_SMALL
+  else:
+    margin = MARGIN_NORMAL

@@ -17,6 +17,7 @@ var center: Array
 
 var progression : Progression
 export(PackedScene) var progression_prefab: PackedScene
+var fast := false
 
 func _ready():
   pipes = [bottom_pipe, left_pipe, right_pipe, top_pipe]
@@ -24,7 +25,7 @@ func _ready():
   
 func add_note(note: int):
   var pipe: Pipe = pipes[note]
-  pipe.add_line()
+  pipe.add_line(fast)
 
 func clear():
   for pipe in pipes:

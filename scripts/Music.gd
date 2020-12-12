@@ -14,6 +14,7 @@ var metronome: Metronome
 var current_bar := 0
 
 var ending := false
+var precise := false
 
 func _ready():
   mixing_desk.init_song(0)
@@ -74,6 +75,7 @@ func on_metronome_started(instance: Metronome):
     metronome.disconnect("beat_ended", self, "on_beat_ended")
   metronome = instance
   metronome.connect("beat_ended", self, "on_beat_ended")
+  metronome.set_precision(precise)
   
 func on_beat_ended(beat: int):
   emit_signal("beat_ended", beat)
@@ -106,3 +108,8 @@ func reset():
 func reset_track_speed():
   layers.track_speed = 0.8
   end_layer.track_speed = 0.6
+  
+func set_difficulty(hard: bool):
+  precise = hard
+  if metronome && metronome != null:
+    metronome.set_precision(precise)

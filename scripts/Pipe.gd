@@ -13,14 +13,15 @@ onready var tween: Tween = $Tween
 func _ready():
   success_bar.color = line_color.lightened(0.5)
 
-func add_line():
+func add_line(fast: bool = false):
   var line: ColorRect = line_prefab.instance()
   line.color = line_color
   lines.add_child(line)
   var line_tween: Tween = line.get_child(0)
+  var trans: int = { false: Tween.TRANS_LINEAR, true: Tween.TRANS_SINE }[fast]
   line_tween.interpolate_property(line, "anchor_left",
     0.0, 1.0,
-    duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
+    duration, trans, Tween.EASE_IN)
   line_tween.start()
 
 func clear():

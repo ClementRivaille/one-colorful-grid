@@ -25,6 +25,8 @@ var LAST_LEVEL := 5
 var last_bar := false
 var beats_end := 0
 
+var hard_mode := false
+
 func _ready():
   randomize()
   Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -71,6 +73,9 @@ func _input(event: InputEvent):
     visualizer.release(2)
   if event.is_action_released("ui_up"):
     visualizer.release(3)
+    
+  if event.is_action_pressed("hard") && level == 0:
+    toggle_hard_mode()
       
 func start_game():
   level = 1
@@ -104,9 +109,11 @@ func on_miss():
   melody.clear()
   view.shake()
   
-  if shields.has_shield() && level < LAST_LEVEL:
+  var protected = shields.has_shield() && level < LAST_LEVEL && !hard_mode
+  if level < LAST_LEVEL:
     shields.remove_shield()
-  else:
+    
+  if !protected:
     if level == LAST_LEVEL:
       cancel_end()
 
@@ -244,3 +251,9 @@ func exit_freemode():
   title.visible = true
   shields.clear()
   free_mode = false
+
+func toggle_hard_mode():
+  hard_mode = !hard_mode
+  visualizer.fast = hard_mode
+  music.set_difficulty(hard_mode)
+  $HardMode.visible = hard_mode
