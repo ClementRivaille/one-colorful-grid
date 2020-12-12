@@ -207,15 +207,16 @@ func start_credits():
   credits.display_jam()
   yield(music, "bar")
   yield(music, "bar")
-  if shields.qt < 4:
+  
+  var free_unlocked := shields.qt == 4
+  if !free_unlocked:
     credits.display_bonus()
     music.stop_after_loop()
   else:
     credits.display_free_mode()
-    free_mode = true
 
   yield(music, "end")
-  if !free_mode: 
+  if !free_unlocked: 
     sfx.play_end()
     start_over()
   else:

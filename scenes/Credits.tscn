@@ -39,7 +39,6 @@ extra_spacing_bottom = 10
 font_data = ExtResource( 1 )
 
 [node name="Credits" type="Control"]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
@@ -189,7 +188,7 @@ valign = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = SubResource( 8 )
-text = "(use space or enter to go back to title)"
+text = "(to exit, use space or enter)"
 align = 1
 valign = 2
 __meta__ = {
